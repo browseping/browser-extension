@@ -6,6 +6,8 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { FaTrophy } from 'react-icons/fa';
 import { AiOutlineLoading } from 'react-icons/ai';
 import UserProfile from '../profile/OtherUserProfile';
+import ExportButton from '../common/ExportButton';
+import { exportLeaderboardAsCSV, exportLeaderboardAsJSON } from '../../../utils/exportUtils';
 
 interface LeaderboardEntry {
   rank: number;
@@ -129,9 +131,13 @@ const LeaderboardPanel: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             </div>
           </div>
           <div className="text-right">
-            <div className="text-lg font-bold">
-              <FaTrophy />
-            </div>
+            <ExportButton
+              onExportCSV={() => exportLeaderboardAsCSV({ month: data.month, leaderboard: data.leaderboard })}
+              onExportJSON={() => exportLeaderboardAsJSON({ month: data.month, leaderboard: data.leaderboard })}
+              label="Export"
+              variant="minimal"
+              size="sm"
+            />
           </div>
         </div>
       </div>

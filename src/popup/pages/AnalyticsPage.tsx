@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiBarChart, FiTrendingUp, FiClock } from 'react-icons/fi';
+import { FiBarChart, FiClock } from 'react-icons/fi';
 import { FaTrophy } from 'react-icons/fa';
 import LeaderboardPanel from '../components/analytics/LeaderboardPanel';
 import TabUsageAnalytics from '../components/analytics/TabUsageAnalytics';
@@ -31,13 +31,7 @@ const AnalyticsPage: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full">
-      {/* Page Header */}
-      {/* <div className="p-4 pb-0">
-        <h1 className="text-xl font-bold text-gray-800 mb-1">Analytics</h1>
-        <p className="text-sm text-gray-600">Track your browsing patterns and compare with friends</p>
-      </div> */}
 
-      {/* Compact Tabs */}
       <div className="px-4 pt-4">
         <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
           {tabs.map(tab => (
@@ -57,7 +51,6 @@ const AnalyticsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Tab Content */}
       <div className="flex-1 overflow-y-auto px-4 pb-4">
         <div className="mt-4">
           {tabs.find(tab => tab.key === activeTab)?.component}

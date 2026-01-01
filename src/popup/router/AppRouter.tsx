@@ -33,6 +33,7 @@ import NotificationPage from '../pages/NotificationPage';
 import AboutPage from '../pages/AboutPage';
 import HelpPage from '../pages/HelpPage';
 import PrivacyPage from '../pages/PrivacyPage';
+import DataManagementPage from '../pages/DataManagementPage';
 import { MessageProvider } from '../context/MessageContext';
 
 const AppRouter: React.FC = () => {
@@ -185,6 +186,7 @@ const AuthenticatedApp: React.FC = () => {
         
         {/* other pages */}
         <Route path="/settings" element={<PrivacyPage />} />
+        <Route path="/data-management" element={<DataManagementPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/edit" element={<ProfileEditPage />} />
         <Route path="/profile/personal" element={<PersonalDetailsPage />} />

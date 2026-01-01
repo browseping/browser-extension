@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 import { useAuth } from "../../context/AuthContext";
 import { fetchHourlyPresence } from "../../../services/api";
+import ExportButton from "../common/ExportButton";
+import { exportHourlyPresenceAsCSV, exportHourlyPresenceAsJSON } from "../../../utils/exportUtils";
 
 function formatDuration(seconds: number) {
   const hrs = Math.floor(seconds / 3600);
@@ -43,15 +45,24 @@ const HourlyPresenceAnalytics: React.FC = () => {
     <div>
       <div className="flex items-center justify-between mb-2">
         <div className="font-semibold text-gray-700">Hourly Activity</div>
-        <select
-          className="border rounded px-2 py-1 text-sm bg-white"
-          value={days}
-          onChange={e => setDays(Number(e.target.value))}
-        >
-          {DURATIONS.map(opt => (
-            <option key={opt.value} value={opt.value}>{opt.label}</option>
-          ))}
-        </select>
+        <div className="flex items-center space-x-2">
+          <select
+            className="border rounded px-2 py-1 text-sm bg-white"
+            value={days}
+            onChange={e => setDays(Number(e.target.value))}
+          >
+            {DURATIONS.map(opt => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+          <ExportButton
+            onExportCSV={() => exportHourlyPresenceAsCSV(data)}
+            onExportJSON={() => exportHourlyPresenceAsJSON(data)}
+            label="Export"
+            variant="secondary"
+            size="sm"
+          />
+        </div>
       </div>
       <div className="mb-4 p-4 bg-blue-50 rounded-lg flex flex-col items-center">
         <div className="text-sm text-gray-500">

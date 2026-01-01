@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiUser, FiBell, FiHelpCircle, FiInfo, FiLogOut, FiShield, FiMail } from 'react-icons/fi';
+import { FiUser, FiBell, FiHelpCircle, FiInfo, FiLogOut, FiShield, FiMail, FiDatabase } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
@@ -34,6 +34,13 @@ const MorePage: React.FC = () => {
       label: 'Privacy & Security',
       description: 'Control who can see your activity and information',
       href: '#/settings',
+      category: 'account'
+    },
+    {
+      icon: <FiDatabase size={20} />,
+      label: 'Data Management',
+      description: 'Export and manage your analytics',
+      href: '#/data-management',
       category: 'account'
     },
     

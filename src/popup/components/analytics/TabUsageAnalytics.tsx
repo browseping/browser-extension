@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { fetchWeeklyTabUsage } from "../../../services/api";
 import { useAuth } from "../../context/AuthContext";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import ExportButton from "../common/ExportButton";
+import { exportTabUsageAsCSV, exportTabUsageAsJSON } from "../../../utils/exportUtils";
 
 const TabUsageAnalytics: React.FC = () => {
     const { user } = useAuth();
@@ -93,6 +95,17 @@ const TabUsageAnalytics: React.FC = () => {
             <div className="bg-white rounded-xl border border-gray-200 p-4">
                 <div className="flex items-center justify-between mb-3">
                     <h3 className="font-semibold text-gray-700">Weekly Tab Usage</h3>
+                    <div className="flex items-center space-x-2">
+                        <ExportButton
+                            onExportCSV={() => exportTabUsageAsCSV(tabUsage)}
+                            onExportJSON={() => exportTabUsageAsJSON(tabUsage)}
+                            label="Export"
+                            variant="secondary"
+                            size="sm"
+                        />
+                    </div>
+                </div>
+                <div className="mb-2">
                     <span className="text-xs text-gray-500">Click bars to view details</span>
                 </div>
                 

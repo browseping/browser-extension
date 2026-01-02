@@ -117,21 +117,14 @@ const LeaderboardPanel: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   return (
     <div className="flex flex-col h-full">
       <div className="mb-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-2 text-white">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-bold">Monthly Leaderboard</h2>
-            <div className="flex items-center space-x-2 text-xs opacity-90">
-              <span className="bg-white/20 px-2 py-0.5 rounded">
-                {data.month}
-              </span>
-              <span>•</span>
-              <span>{data.pagination.totalUsers} competitors</span>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-lg font-bold">
-              <FaTrophy />
-            </div>
+        <div>
+          <h2 className="text-lg font-bold">Monthly Leaderboard</h2>
+          <div className="flex items-center space-x-2 text-xs opacity-90">
+            <span className="bg-white/20 px-2 py-0.5 rounded">
+              {data.month}
+            </span>
+            <span>•</span>
+            <span>{data.pagination.totalUsers} competitors</span>
           </div>
         </div>
       </div>

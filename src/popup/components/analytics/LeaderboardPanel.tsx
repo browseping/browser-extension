@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useAuth } from '../../context/AuthContext';
 import { fetchLeaderboard, fetchUserRank } from '../../../services/api';
@@ -124,7 +124,7 @@ const LeaderboardPanel: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               <span className="bg-white/20 px-2 py-0.5 rounded">
                 {data.month}
               </span>
-              <span>•</span>
+              <span>ΓÇó</span>
               <span>{data.pagination.totalUsers} competitors</span>
             </div>
           </div>
@@ -178,7 +178,7 @@ const LeaderboardPanel: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     : 'bg-gray-50 text-gray-600'
                 }`}>
                   {entry.rank <= 3 ? (
-                    entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : '🥉'
+                    entry.rank === 1 ? '≡ƒÑç' : entry.rank === 2 ? '≡ƒÑê' : '≡ƒÑë'
                   ) : (
                     entry.rank
                   )}

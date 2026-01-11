@@ -14,6 +14,7 @@ import EmailVerificationPage from '../pages/EmailVerificationPage';
 import ForgotPasswordPage from '../pages/ForgotPassword/ForgotPasswordPage';
 import ForgotPasswordOTPPage from '../pages/ForgotPassword/ForgotPasswordOTPPage';
 import PasswordResetPage from '../pages/ForgotPassword/PasswordResetPage';
+import { OnboardingFlow } from '../components/onboarding';
 
 // Main Pages
 import HomePage from '../pages/HomePage';
@@ -50,16 +51,15 @@ const AppRouter: React.FC = () => {
       const forgotPasswordStep = localStorage.getItem('forgotPasswordStep');
       const currentHash = window.location.hash;
       
-      // Handle email verification flow
       if (pendingEmail && (currentHash === '#/' || currentHash === '' || currentHash === '#')) {
         setTimeout(() => {
           if (window.location.hash === '#/' || window.location.hash === '' || window.location.hash === '#') {
             window.location.hash = '#/email-verification';
           }
         }, 200);
+        return;
       }
       
-      // Handle forgot password flow restoration
       if (forgotPasswordStep && (currentHash === '#/' || currentHash === '' || currentHash === '#')) {
         setTimeout(() => {
           if (window.location.hash === '#/' || window.location.hash === '' || window.location.hash === '#') {
@@ -74,6 +74,15 @@ const AppRouter: React.FC = () => {
                 window.location.hash = '#/forgot-password';
                 break;
             }
+          }
+        }, 200);
+        return;
+      }
+
+      if (currentHash === '#/' || currentHash === '' || currentHash === '#') {
+        setTimeout(() => {
+          if (window.location.hash === '#/' || window.location.hash === '' || window.location.hash === '#') {
+            window.location.hash = '#/onboarding';
           }
         }, 200);
       }
@@ -94,7 +103,9 @@ const AppRouter: React.FC = () => {
         {/* Auth Routes */}
         {!user && (
           <>
-            <Route path="/" element={<WelcomeScreen />} />
+            <Route path="/" element={<OnboardingFlow />} />
+            <Route path="/onboarding" element={<OnboardingFlow />} />
+            <Route path="/welcome" element={<WelcomeScreen />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/email-verification" element={<EmailVerificationPage onVerificationSuccess={handleEmailVerified}/>} />
             <Route path="/signup" element={<SignupPage verifiedEmail={verifiedEmail} />} />

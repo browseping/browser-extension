@@ -124,7 +124,7 @@ const LeaderboardPanel: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               <span className="bg-white/20 px-2 py-0.5 rounded">
                 {data.month}
               </span>
-              <span>ΓÇó</span>
+              <span>•</span>
               <span>{data.pagination.totalUsers} competitors</span>
             </div>
           </div>
@@ -178,7 +178,7 @@ const LeaderboardPanel: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     : 'bg-gray-50 text-gray-600'
                 }`}>
                   {entry.rank <= 3 ? (
-                    entry.rank === 1 ? '≡ƒÑç' : entry.rank === 2 ? '≡ƒÑê' : '≡ƒÑë'
+                    entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : '🥉'
                   ) : (
                     entry.rank
                   )}
@@ -258,5 +258,4 @@ const LeaderboardPanel: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     </div>
   );
 };
-
 export default LeaderboardPanel;

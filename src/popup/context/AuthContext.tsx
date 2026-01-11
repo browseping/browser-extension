@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { User, updateUserInLocalStorage, getUserFromLocalStorage, clearUserFromLocalStorage } from '../utils/localStorage';
+import { User, updateUserInLocalStorage, getUserFromLocalStorage, clearUserFromLocalStorage, resetOnboardingStatus } from '../utils/localStorage';
 import { logout as logoutAPI } from '../../services/api';
 import toast from 'react-hot-toast';
 
@@ -67,6 +67,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
   const handleLogoutLocal = async () => {
     setUser(null);
     await clearUserFromLocalStorage();
+    await resetOnboardingStatus();
     chrome.runtime.sendMessage({ type: 'LOGOUT' });
   };
 

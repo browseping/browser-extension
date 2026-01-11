@@ -1,7 +1,8 @@
 import React from 'react';
-import { FiUser, FiBell, FiHelpCircle, FiInfo, FiLogOut, FiShield, FiMail } from 'react-icons/fi';
+import { FiUser, FiBell, FiHelpCircle, FiInfo, FiLogOut, FiShield, FiMail, FiCompass } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { resetOnboardingStatus } from '../utils/localStorage';
 
 interface MenuItem {
   icon: React.ReactNode;
@@ -18,6 +19,11 @@ const MorePage: React.FC = () => {
   const handleLogout = () => {
     logout();
     window.location.href = '#/';
+  };
+
+  const handleViewTutorial = async () => {
+    await resetOnboardingStatus();
+    window.location.href = '#/onboarding';
   };
 
   const menuItems: MenuItem[] = [
@@ -37,7 +43,13 @@ const MorePage: React.FC = () => {
       category: 'account'
     },
     
-    // Preferences Section
+    {
+      icon: <FiCompass size={20} />,
+      label: 'View Tutorial',
+      description: 'Learn how to use BrowsePing features',
+      action: handleViewTutorial,
+      category: 'preferences'
+    },
     {
       icon: <FiBell size={20} />,
       label: 'Notifications',

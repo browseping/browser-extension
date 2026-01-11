@@ -117,14 +117,46 @@ export const getUserFromLocalStorage = (): Promise<User | null> => {
   });
 };
 
-/**
- * Clears user data from localStorage
- */
 export const clearUserFromLocalStorage = (): Promise<void> => {
   return new Promise((resolve) => {
     chrome.storage.local.remove('user', () => {
       if (chrome.runtime.lastError) {
         console.error('Error removing user from localStorage:', chrome.runtime.lastError);
+      }
+      resolve();
+    });
+  });
+};
+
+export const getOnboardingStatus = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    chrome.storage.local.get('hasCompletedOnboarding', (result) => {
+      if (chrome.runtime.lastError) {
+        console.error('Error reading onboarding status:', chrome.runtime.lastError);
+        resolve(false);
+        return;
+      }
+      resolve(result.hasCompletedOnboarding || false);
+    });
+  });
+};
+
+export const setOnboardingComplete = (): Promise<void> => {
+  return new Promise((resolve) => {
+    chrome.storage.local.set({ hasCompletedOnboarding: true }, () => {
+      if (chrome.runtime.lastError) {
+        console.error('Error setting onboarding status:', chrome.runtime.lastError);
+      }
+      resolve();
+    });
+  });
+};
+
+export const resetOnboardingStatus = (): Promise<void> => {
+  return new Promise((resolve) => {
+    chrome.storage.local.set({ hasCompletedOnboarding: false }, () => {
+      if (chrome.runtime.lastError) {
+        console.error('Error resetting onboarding status:', chrome.runtime.lastError);
       }
       resolve();
     });

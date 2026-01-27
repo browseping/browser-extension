@@ -188,11 +188,16 @@ export const fetchUserProfile = async (username: string, token: string) => {
 };
 
 export const fetchWeeklyTabUsage = async (token: string) => {
-  const res = await fetch(`${BACKEND_URL}/api/analytics/tab-usage/weekly`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  return await res.json();
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  const res = await fetch(
+    `${BACKEND_URL}/api/analytics/tab-usage/weekly?timezone=${encodeURIComponent(timezone)}`,
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+
+  return res.json();
 };
+
 
 export const updatePrivacySettings = async (data: any, token: string) => {
   const res = await fetch(`${BACKEND_URL}/api/profile/privacy`, {

@@ -126,17 +126,17 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
             </p>
           </div>
 
-          <div className="space-y-3 pt-4">
+          <ul className="space-y-3 pt-4">
             {currentStepData.features.map((feature, index) => (
-              <div 
+              <li 
                 key={index}
                 className="flex items-center justify-center space-x-2 text-sm text-gray-700"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-600"></div>
                 <span>{feature}</span>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
 

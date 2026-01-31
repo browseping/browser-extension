@@ -36,7 +36,7 @@ const WelcomeScreen: React.FC = () => {
             href="#/onboarding" 
             className="block w-full bg-transparent hover:bg-blue-50 text-blue-600 font-medium py-3 px-4 border border-blue-300 rounded-lg transition duration-200 text-center"
           >
-            Explore Again
+            View Tutorial
           </a>
         </div>
         

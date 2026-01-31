@@ -195,7 +195,7 @@ export const fetchWeeklyTabUsage = async (token: string) => {
     { headers: { Authorization: `Bearer ${token}` } }
   );
 
-  return res.json();
+  return await res.json();
 };
 
 

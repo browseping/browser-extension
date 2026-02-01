@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiMonitor, FiShield, FiUsers, FiCheck, FiTrendingUp } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 interface OnboardingFlowProps {
   onComplete?: () => void;
 }
 
 const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [searchParams] = useSearchParams();
+  const stepParam = searchParams.get('step');
+  const [currentStep, setCurrentStep] = useState(stepParam ? parseInt(stepParam) : 0);
   const navigate = useNavigate();
 
   const steps = [
@@ -100,6 +102,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
   };
 
   const handleSkip = () => {
+    sessionStorage.setItem('onboardingCompleted', 'true');
     if (onComplete) {
       onComplete();
     } else {

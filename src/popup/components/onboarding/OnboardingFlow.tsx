@@ -87,6 +87,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
+      localStorage.setItem('onboardingCompleted', 'true');
       if (onComplete) {
         onComplete();
       } else {
@@ -102,7 +103,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
   };
 
   const handleSkip = () => {
-    sessionStorage.setItem('onboardingCompleted', 'true');
+    localStorage.setItem('onboardingCompleted', 'true');
     if (onComplete) {
       onComplete();
     } else {

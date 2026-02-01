@@ -213,7 +213,7 @@ const EmailVerificationPage: React.FC<EmailVerificationPageProps> = ({
     // toast.success('Verification cancelled');
     
     setTimeout(() => {
-      window.location.hash = '#/';
+      window.location.hash = '#/welcome';
     }, 500);
   };
 

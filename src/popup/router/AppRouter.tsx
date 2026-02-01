@@ -82,7 +82,7 @@ const AppRouter: React.FC = () => {
       if (currentHash === '#/' || currentHash === '' || currentHash === '#') {
         setTimeout(() => {
           if (window.location.hash === '#/' || window.location.hash === '' || window.location.hash === '#') {
-            const onboardingCompleted = sessionStorage.getItem('onboardingCompleted') === 'true';
+            const onboardingCompleted = localStorage.getItem('onboardingCompleted') === 'true';
             window.location.hash = onboardingCompleted ? '#/welcome' : '#/onboarding';
           }
         }, 200);
@@ -105,7 +105,7 @@ const AppRouter: React.FC = () => {
         {!user && (
           <>
             <Route path="/" element={
-              sessionStorage.getItem('onboardingCompleted') === 'true' 
+              localStorage.getItem('onboardingCompleted') === 'true' 
                 ? <WelcomeScreen /> 
                 : <OnboardingFlow />
             } />

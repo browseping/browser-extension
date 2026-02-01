@@ -188,11 +188,16 @@ export const fetchUserProfile = async (username: string, token: string) => {
 };
 
 export const fetchWeeklyTabUsage = async (token: string) => {
-  const res = await fetch(`${BACKEND_URL}/api/analytics/tab-usage/weekly`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  const res = await fetch(
+    `${BACKEND_URL}/api/analytics/tab-usage/weekly?timezone=${encodeURIComponent(timezone)}`,
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+
   return await res.json();
 };
+
 
 export const updatePrivacySettings = async (data: any, token: string) => {
   const res = await fetch(`${BACKEND_URL}/api/profile/privacy`, {
@@ -215,11 +220,16 @@ export const flushAnalytics = async (token: string) => {
 };
 
 export async function fetchHourlyPresence(token: string, days = 7) {
-  const res = await fetch(`${BACKEND_URL}/api/analytics/presence/hourly?days=${days}`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const res = await fetch(
+    `${BACKEND_URL}/api/analytics/presence/hourly?days=${days}&timezone=${encodeURIComponent(timezone)}`,
+    {
+      headers: { Authorization: `Bearer ${token}` }
+    }
+  );
   return res.json();
 }
+
 
 export async function fetchLeaderboard(token: string, page = 1, limit = 10, month?: string) {
   const params = new URLSearchParams({

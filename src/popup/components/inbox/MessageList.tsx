@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useMessage } from '../../context/MessageContext';
 import MessageItem from './MessageItem';
+import TypingIndicator from './TypingIndicator';
 
 interface MessageListProps {
   messages: any[];
@@ -10,8 +12,14 @@ interface MessageListProps {
 
 const MessageList = ({ messages, conversationId, conversationType }: MessageListProps) => {
   const { user } = useAuth();
+  const { conversations, typingUsers } = useMessage();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  // Get conversation and check if other user is typing
+  const conversation = conversations.find(c => c.conversation.id === conversationId);
+  const otherParticipant = conversation?.conversation.participants.find(p => p.user.id !== user?.id);
+  const isOtherUserTyping = otherParticipant && typingUsers[conversationId]?.includes(otherParticipant.user.id);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -49,6 +57,11 @@ const MessageList = ({ messages, conversationId, conversationType }: MessageList
           />
         );
       })}
+      {isOtherUserTyping && otherParticipant && (
+        <TypingIndicator 
+          userName={otherParticipant.user.displayName || otherParticipant.user.username}
+        />
+      )}
       <div ref={messagesEndRef} />
     </div>
   );

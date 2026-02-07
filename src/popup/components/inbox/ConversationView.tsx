@@ -203,7 +203,7 @@ const ConversationView = ({ conversationId, onBack }: ConversationViewProps) => 
       </div>
 
       {!isPending && (
-        <MessageInput onSend={handleSendMessage} />
+        <MessageInput onSend={handleSendMessage} conversationId={conversationId} />
       )}
     </div>
   );

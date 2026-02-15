@@ -127,7 +127,7 @@ const TabUsageAnalytics: React.FC = () => {
                         />
                         <Bar 
                             dataKey="hours" 
-                            fill="#3182ce"
+                            fill="var(--primary)"
                             radius={[2, 2, 0, 0]}
                         />
                     </BarChart>

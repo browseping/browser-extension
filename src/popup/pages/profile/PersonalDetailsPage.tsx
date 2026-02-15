@@ -23,7 +23,7 @@ const PersonalDetailsPage: React.FC = () => {
 
   useEffect(() => {
     if (!user) return;
-    
+
     const loadProfile = async () => {
       setLoading(true);
       try {
@@ -114,9 +114,9 @@ const PersonalDetailsPage: React.FC = () => {
       ), {
         duration: Infinity,
         style: {
-          background: 'white',
-          color: 'black',
-          border: '1px solid #e5e7eb',
+          background: 'var(--surface)',
+          color: 'var(--text-primary)',
+          border: '1px solid var(--border)',
           borderRadius: '12px',
           padding: '16px',
           minWidth: '280px'
@@ -212,6 +212,7 @@ const PersonalDetailsPage: React.FC = () => {
               value={formData.dateOfBirth}
               onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
               max={new Date().toISOString().split('T')[0]} // Prevent future dates
+              placeholder="Select your date of birth"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
             />
             {age !== null && (

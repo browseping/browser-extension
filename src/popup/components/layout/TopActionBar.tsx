@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiBell, FiRefreshCw } from 'react-icons/fi';
+import ThemeToggle from '../ThemeToggle';
 
 interface TopActionBarProps {
   onRefresh?: () => void;
@@ -24,6 +25,7 @@ const TopActionBar: React.FC<TopActionBarProps> = ({
 
       {/* Action Icons */}
       <div className="flex items-center space-x-1">
+        <ThemeToggle />
         <button
           onClick={onNotifications}
           className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors relative"

@@ -221,9 +221,9 @@ const SocialMediaPage: React.FC = () => {
       ), {
         duration: Infinity,
         style: {
-          background: 'white',
-          color: 'black',
-          border: '1px solid #e5e7eb',
+          background: 'var(--surface)',
+          color: 'var(--text-primary)',
+          border: '1px solid var(--border)',
           borderRadius: '12px',
           padding: '16px',
           minWidth: '280px'

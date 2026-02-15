@@ -71,7 +71,7 @@ const HourlyPresenceAnalytics: React.FC = () => {
           <XAxis dataKey="hour" />
           <YAxis label={{ value: "Minutes", angle: -90, position: "insideLeft" }} />
           <Tooltip formatter={v => `${v} min`} />
-          <Line type="monotone" dataKey="minutes" stroke="#3182ce" strokeWidth={2} dot={false} />
+          <Line type="monotone" dataKey="minutes" stroke="var(--primary)" strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
       <div className="text-xs text-gray-500 mt-1">

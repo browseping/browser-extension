@@ -130,7 +130,7 @@ const LeaderboardPanel: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           </div>
           <div className="text-right">
             <div className="text-lg font-bold">
-              <FaTrophy />
+              <FaTrophy style={{ color: 'var(--primary)' }} />
             </div>
           </div>
         </div>

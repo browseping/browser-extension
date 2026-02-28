@@ -1,6 +1,7 @@
 import React from 'react';
-import { FiUser, FiBell, FiHelpCircle, FiInfo, FiLogOut, FiShield, FiMail } from 'react-icons/fi';
+import { FiUser, FiBell, FiHelpCircle, FiInfo, FiLogOut, FiShield, FiMail, FiChevronRight } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 interface MenuItem {
@@ -14,10 +15,20 @@ interface MenuItem {
 
 const MorePage: React.FC = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    window.location.href = '#/';
+    navigate('/');
+    toast.success('Logged out successfully');
+  };
+
+  const handleNavigation = (href: string) => {
+    if (href.startsWith('mailto:')) {
+      window.location.href = href;
+    } else {
+      navigate(href.replace('#', ''));
+    }
   };
 
   const menuItems: MenuItem[] = [
@@ -26,14 +37,14 @@ const MorePage: React.FC = () => {
       icon: <FiUser size={20} />,
       label: 'Profile Settings',
       description: 'Edit your profile information and avatar',
-      href: '#/profile',
+      href: '/profile',
       category: 'account'
     },
     {
       icon: <FiShield size={20} />,
       label: 'Privacy & Security',
       description: 'Control who can see your activity and information',
-      href: '#/settings',
+      href: '/privacy',
       category: 'account'
     },
     
@@ -42,7 +53,7 @@ const MorePage: React.FC = () => {
       icon: <FiBell size={20} />,
       label: 'Notifications',
       description: 'Manage notification preferences and alerts',
-      href: '#/notifications',
+      href: '/notifications',
       category: 'preferences'
     },
     
@@ -51,7 +62,7 @@ const MorePage: React.FC = () => {
       icon: <FiHelpCircle size={20} />,
       label: 'Help & Support',
       description: 'Get help, report issues, and contact support',
-      href: '#/help',
+      href: '/help',
       category: 'support'
     },
     {
@@ -67,7 +78,7 @@ const MorePage: React.FC = () => {
       icon: <FiInfo size={20} />,
       label: 'About BrowsePing',
       description: 'Version info, changelog, and credits',
-      href: '#/about',
+      href: '/about',
       category: 'about'
     }
   ];
@@ -80,105 +91,102 @@ const MorePage: React.FC = () => {
   ];
 
   return (
-    <div className="p-4">
-      {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-xl font-bold text-gray-800 mb-1">More</h1>
-        <p className="text-sm text-gray-600">Settings, support, and account options</p>
-      </div>
-
-      {/* User Profile Card */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 mb-6 border border-blue-100">
-        <div className="flex items-center space-x-3">
-          <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
-            {user?.displayName?.[0]?.toUpperCase() || user?.username?.[0]?.toUpperCase()}
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-gray-800 truncate">
-              {user?.displayName || user?.username}
-            </h3>
-            <p className="text-sm text-gray-600">@{user?.username}</p>
-            <div className="flex items-center space-x-2 mt-1">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-xs text-green-600 font-medium">Online</span>
-            </div>
-          </div>
-          <a
-            href="#/profile"
-            className="text-blue-600 hover:text-blue-800 p-2 hover:bg-blue-100 rounded-lg transition-colors"
-            title="Edit Profile"
-          >
-            <FiUser size={18} />
-          </a>
+    <div className="min-h-screen bg-gray-50">
+      <div className="p-4">
+        {/* Header - Enhanced visibility */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900 mb-1">More</h1>
+          <p className="text-sm text-gray-600">Settings, support, and account options</p>
         </div>
-      </div>
 
-      {/* Menu Categories */}
-      <div className="space-y-6">
-        {categories.map((category) => (
-          category.items.length > 0 && (
-            <div key={category.key}>
-              <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                {category.label}
+        {/* User Profile Card - Darker gradient for better contrast */}
+        <div className="bg-gradient-to-r from-blue-700 to-blue-900 rounded-xl p-4 mb-6 shadow-lg">
+          <div className="flex items-center space-x-3">
+            <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center font-bold text-xl text-blue-800 shadow-lg">
+              {user?.displayName?.[0]?.toUpperCase() || user?.username?.[0]?.toUpperCase()}
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-white truncate text-lg">
+                {user?.displayName || user?.username}
               </h3>
-              
-              <div className="space-y-2">
-                {category.items.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.href || '#'}
-                    onClick={(e) => {
-                      if (item.action) {
-                        e.preventDefault();
-                        item.action();
-                      }
-                    }}
-                    className="block p-4 bg-white hover:bg-gray-50 border border-gray-200 hover:border-blue-200 hover:shadow-sm rounded-xl transition-all duration-200 group"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className="p-2 bg-blue-50 text-blue-600 group-hover:bg-blue-100 rounded-lg transition-colors">
-                        {item.icon}
-                      </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <span className="font-medium text-gray-800">
-                          {item.label}
-                        </span>
-                        <p className="text-sm text-gray-500 mt-1">
-                          {item.description}
-                        </p>
-                      </div>
-                      
-                      <div className="text-gray-400 group-hover:text-gray-600 transition-colors">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </a>
-                ))}
+              <p className="text-sm text-blue-200">@{user?.username}</p>
+              <div className="flex items-center space-x-2 mt-1">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-xs text-green-300 font-medium">Online</span>
               </div>
             </div>
-          )
-        ))}
-      </div>
+            <button
+              onClick={() => navigate('/profile')}
+              className="text-white hover:text-blue-200 p-2 hover:bg-white/10 rounded-lg transition-colors"
+              title="Edit Profile"
+            >
+              <FiUser size={18} />
+            </button>
+          </div>
+        </div>
 
-      {/* Logout Section */}
-      <div className="mt-8 pt-6 border-t border-gray-200">
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center justify-center space-x-2 p-4 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors group"
-        >
-          <FiLogOut size={20} className="group-hover:scale-110 transition-transform" />
-          <span className="font-medium">Log Out</span>
-        </button>
-      </div>
+        {/* Menu Categories */}
+        <div className="space-y-6">
+          {categories.map((category) => (
+            category.items.length > 0 && (
+              <div key={category.key}>
+                <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3 px-1">
+                  {category.label}
+                </h3>
+                
+                <div className="space-y-2">
+                  {category.items.map((item, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleNavigation(item.href || '#')}
+                      className="w-full text-left p-4 bg-white hover:bg-gray-50 border border-gray-200 hover:border-blue-300 hover:shadow-md rounded-xl transition-all duration-200 group"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="p-2 bg-blue-100 text-blue-700 group-hover:bg-blue-200 rounded-lg transition-colors">
+                          {item.icon}
+                        </div>
+                        
+                        <div className="flex-1 min-w-0">
+                          <span className="font-semibold text-gray-900">
+                            {item.label}
+                          </span>
+                          <p className="text-sm text-gray-600 mt-1">
+                            {item.description}
+                          </p>
+                        </div>
+                        
+                        <div className="text-gray-500 group-hover:text-gray-700 transition-colors">
+                          <FiChevronRight size={20} />
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )
+          ))}
+        </div>
 
-      {/* Footer Info */}
-      <div className="mt-6 text-center space-y-2">
-        <p className="text-xs text-gray-500">
-          BrowsePing v1.0.0
-        </p>
+        {/* Logout Section */}
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center justify-center space-x-2 p-4 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors group"
+          >
+            <FiLogOut size={20} className="group-hover:scale-110 transition-transform" />
+            <span className="font-medium">Log Out</span>
+          </button>
+        </div>
+
+        {/* Footer Info */}
+        <div className="mt-6 text-center space-y-2">
+          <p className="text-xs text-gray-600 font-medium">
+            BrowsePing v1.0.0
+          </p>
+          <p className="text-xs text-gray-500">
+            © 2024 BrowsePing. All rights reserved.
+          </p>
+        </div>
       </div>
     </div>
   );

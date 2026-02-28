@@ -34,7 +34,7 @@ const ProfileEditPage: React.FC = () => {
 
   useEffect(() => {
     if (!user) return;
-    
+
     const loadProfile = async () => {
       setLoading(true);
       try {
@@ -74,7 +74,7 @@ const ProfileEditPage: React.FC = () => {
       if (response.success) {
         toast.success('Profile updated successfully!');
         setOriginalData(formData);
-        
+
         if (response.data) {
           await updateUser(response.data);
         }
@@ -121,9 +121,9 @@ const ProfileEditPage: React.FC = () => {
       ), {
         duration: Infinity,
         style: {
-          background: 'white',
-          color: 'black',
-          border: '1px solid #e5e7eb',
+          background: 'var(--surface)',
+          color: 'var(--text-primary)',
+          border: '1px solid var(--border)',
           borderRadius: '12px',
           padding: '16px',
           minWidth: '280px'
@@ -154,7 +154,7 @@ const ProfileEditPage: React.FC = () => {
             <FiChevronLeft size={20} className="mr-1" />
             <span className="text-sm font-medium">Back</span>
           </button>
-          
+
           <div className="flex-1">
             <h1 className="text-lg font-bold text-gray-800">Edit Profile</h1>
             <p className="text-sm text-gray-600">Update your basic information</p>
@@ -243,6 +243,7 @@ const ProfileEditPage: React.FC = () => {
               type="email"
               value={profileData?.email || ''}
               disabled
+              placeholder="Your email address"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-500 cursor-not-allowed"
             />
             <p className="text-xs text-gray-500 mt-1">
@@ -259,6 +260,7 @@ const ProfileEditPage: React.FC = () => {
               type="text"
               value={user?.username || ''}
               disabled
+              placeholder="Your username"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-500 cursor-not-allowed"
             />
             <p className="text-xs text-gray-500 mt-1">

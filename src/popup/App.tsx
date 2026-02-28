@@ -11,21 +11,21 @@ const App: React.FC = () => {
         toastOptions={{
           duration: 3000,
           style: {
-            background: '#363636',
-            color: '#fff',
+            background: 'var(--toast-bg)',
+            color: 'var(--toast-text)',
             fontSize: '14px',
           },
           success: {
             duration: 2000,
             iconTheme: {
-              primary: '#4ade80',
+              primary: 'var(--success)',
               secondary: 'white',
             },
           },
           error: {
             duration: 4000,
             iconTheme: {
-              primary: '#ef4444',
+              primary: 'var(--error)',
               secondary: 'white',
             },
           },
